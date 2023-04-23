@@ -21,6 +21,8 @@ const allowedCors = [
   'http://praktikum.tk',
   'localhost:3000',
   '127.0.0.1:3000',
+  'https://stormina.students.nomoredomains.monster',
+  'http://stormina.students.nomoredomains.monster',
 ];
 
 app.use((req, res, next) => {
