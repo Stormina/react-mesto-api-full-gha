@@ -22,14 +22,14 @@ const allowedCors = [
   'localhost:3000',
   'https://localhost:3000',
   'https://127.0.0.1:3000',
-  /(https|http)?:\/\/(?:www\.|(?!www))stormina.students.nomoredomains.monster\/[a-z]+\/|[a-z]+\/|[a-z]+(\/|)/,
+  /(https|http)?:\/\/(?:www\.|(?!www))mesto.online.nomoredomains.work\/[a-z]+\/|[a-z]+\/|[a-z]+(\/|)/,
 ];
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', true);
   }
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
