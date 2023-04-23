@@ -22,7 +22,7 @@ const allowedCors = [
   'localhost:3000',
   'https://localhost:3000',
   'https://127.0.0.1:3000',
-  /(https|http)?:\/\/(?:www\.|(?!www))mesto.online.nomoredomains.work\/[a-z]+\/|[a-z]+\/|[a-z]+(\/|)/,
+  'https://stormina.students.nomoredomains.monster',
 ];
 
 app.use((req, res, next) => {
