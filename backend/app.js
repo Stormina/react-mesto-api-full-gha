@@ -20,9 +20,9 @@ const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
   'localhost:3000',
-  '127.0.0.1:3000',
-  'https://stormina.students.nomoredomains.monster',
-  'http://stormina.students.nomoredomains.monster',
+  'https://localhost:3000',
+  'https://127.0.0.1:3000',
+  /(https|http)?:\/\/(?:www\.|(?!www))stormina.students.nomoredomains.monster\/[a-z]+\/|[a-z]+\/|[a-z]+(\/|)/,
 ];
 
 app.use((req, res, next) => {
