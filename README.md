@@ -8,8 +8,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.2.61
+IP-адрес: 158.160.2.61
 
-Frontend https://stormina.students.nomoredomains.monster
+Frontend https://stormina.students.nomoredomains.monster/
 
-Backend https://api.stormina.students.nomoredomains.monster
+Backend https://api.stormina.students.nomoredomains.monster/
