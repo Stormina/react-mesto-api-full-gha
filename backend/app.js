@@ -28,6 +28,8 @@ const allowedCors = [
   'https://127.0.0.1:3000',
   'https://stormina.students.nomoredomains.monster',
   'http://stormina.students.nomoredomains.monster',
+  'https://api.stormina.students.nomoredomains.monster',
+  'http://api.stormina.students.nomoredomains.monster',
 ];
 
 app.use((req, res, next) => {

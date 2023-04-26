@@ -131,7 +131,7 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
       });
 
-      return res.send({ message: 'Всё верно!' });
+      return res.send({ token: jwt });
     })
     .catch((err) => {
       next(err);
