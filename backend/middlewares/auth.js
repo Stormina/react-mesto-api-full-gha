@@ -5,11 +5,11 @@ const auth = (req, res, next) => {
   /*  const token = req.cookies.jwt; */
   const { authorization } = req.headers;
 
-  if (!authorization.startsWith('Bearer')) {
+  if (!authorization || !authorization.startsWith('Bearer ')) {
     throw new UnauthorizedError('Необходима авторизация');
   }
 
-  const token = authorization.split('Bearer ')[1];
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
