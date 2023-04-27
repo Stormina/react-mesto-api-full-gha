@@ -9,7 +9,7 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -19,7 +19,7 @@ module.exports.getCurrentUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
@@ -34,7 +34,7 @@ module.exports.getUserId = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
@@ -54,14 +54,7 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     }))
-    .then((user) => res.send({
-      data: {
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-      },
-    }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictRequestError('Пользователь с таким email уже существует'));
@@ -79,7 +72,7 @@ module.exports.patchUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError({ message: 'Пользователь не найден' });
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
@@ -96,7 +89,7 @@ module.exports.patchAvatar = (req, res, next) => {
       if (!user) {
         throw new NotFoundError({ message: 'Пользователь не найден' });
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
@@ -126,12 +119,13 @@ module.exports.login = (req, res, next) => {
 
       const token = jwt.sign({ _id: userId }, 'some-secret-key', { expiresIn: '7d' });
 
-      res.cookie('jwt', token, {
+      /* res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
       });
 
-      return res.send({ token });
+      return res.send({ token }); */
+      res.send({ token });
     })
     .catch((err) => {
       next(err);
