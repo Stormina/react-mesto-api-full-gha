@@ -116,7 +116,7 @@ module.exports.login = (req, res, next) => {
         throw new UnauthorizedError('Неправильные почта или пароль.');
       }
 
-      const token = jwt.sign({ userId }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
+      const token = jwt.sign({ _id: userId }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
       res.send({ token });
     })
     .catch((err) => {
