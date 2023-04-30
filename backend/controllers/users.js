@@ -23,7 +23,11 @@ module.exports.getCurrentUser = (req, res, next) => {
       }
       res.send(user);
     })
-    .catch(next);
+    .catch((err) => {
+      if (err instanceof mongoose.Error.CastError) {
+        next(new BadRequestError('Переданы не корректные данные'));
+      } else next(err);
+    });
 };
 
 module.exports.getUserId = (req, res, next) => {
