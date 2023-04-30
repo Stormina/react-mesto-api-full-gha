@@ -99,27 +99,20 @@ module.exports.patchAvatar = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  let userId;
 
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
         throw new UnauthorizedError('Неправильные почта или пароль.');
       }
-
-      userId = user._id;
-
-      return bcrypt.compare(password, user.password);
+      bcrypt.compare(password, user.password)
+        .then((matched) => {
+          if (!matched) {
+            throw new UnauthorizedError('Неправильные почта или пароль.');
+          }
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
+          return res.send({ token });
+        });
     })
-    .then((matched) => {
-      if (!matched) {
-        throw new UnauthorizedError('Неправильные почта или пароль.');
-      }
-
-      const token = jwt.sign({ _id: userId }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
-      res.send({ token });
-    })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
